@@ -11,3 +11,7 @@ def is_not(x: Any) -> Callable[[Any], bool]:
 
 def eq(x: Any) -> Callable[[Any], bool]:
     return lambda t: t == x
+
+
+def neq(x: Any) -> Callable[[Any], bool]:
+    return lambda t: t != x

@@ -11,3 +11,7 @@ def test_is_not_x():
 
 def test_eq():
     assert list(filter(F.eq(123), [0, 123, 4, 567, 123])) == [123, 123]
+
+
+def test_neq():
+    assert list(filter(F.neq(123), [0, 123, 4, 567, 123])) == [0, 4, 567]
