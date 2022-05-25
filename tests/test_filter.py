@@ -19,3 +19,7 @@ def test_neq():
 
 def test_lt():
     assert list(filter(F.lt(50), [0, 123, 4, 567, 123])) == [0, 4]
+
+
+def test_le():
+    assert list(filter(F.le(4), [0, 123, 4, 567, 123])) == [0, 4]

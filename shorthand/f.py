@@ -1,21 +1,28 @@
 from typing import Any, Callable
 
 
-def is_(x: Any) -> Callable[[Any], bool]:
+_FilterBuilderType = Callable[[Any], bool]
+
+
+def is_(x: Any) -> _FilterBuilderType:
     return lambda t: t is x
 
 
-def is_not(x: Any) -> Callable[[Any], bool]:
+def is_not(x: Any) -> _FilterBuilderType:
     return lambda t: t is not x
 
 
-def eq(x: Any) -> Callable[[Any], bool]:
+def eq(x: Any) -> _FilterBuilderType:
     return lambda t: t == x
 
 
-def neq(x: Any) -> Callable[[Any], bool]:
+def neq(x: Any) -> _FilterBuilderType:
     return lambda t: t != x
 
 
-def lt(x: Any) -> Callable[[Any], bool]:
+def lt(x: Any) -> _FilterBuilderType:
     return lambda t: t < x
+
+
+def le(x: Any) -> _FilterBuilderType:
+    return lambda t: t <= x
