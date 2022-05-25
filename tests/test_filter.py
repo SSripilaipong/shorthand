@@ -31,3 +31,7 @@ def test_gt():
 
 def test_ge():
     assert list(filter(F.ge(123), [0, 123, 4, 567, 123])) == [123, 567, 123]
+
+
+def test_is_in():
+    assert list(filter(F.is_in(["abc", 0, 567]), [0, 123, 4, 567, 123, "abc"])) == [0, 567, "abc"]

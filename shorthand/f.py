@@ -1,5 +1,4 @@
-from typing import Any, Callable
-
+from typing import Any, Callable, Collection
 
 _FilterBuilderType = Callable[[Any], bool]
 
@@ -34,3 +33,7 @@ def gt(x: Any) -> _FilterBuilderType:
 
 def ge(x: Any) -> _FilterBuilderType:
     return lambda t: t >= x
+
+
+def is_in(x: Collection) -> _FilterBuilderType:
+    return lambda t: t in x
