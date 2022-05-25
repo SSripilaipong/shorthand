@@ -30,3 +30,7 @@ def le(x: Any) -> _FilterBuilderType:
 
 def gt(x: Any) -> _FilterBuilderType:
     return lambda t: t > x
+
+
+def ge(x: Any) -> _FilterBuilderType:
+    return lambda t: t >= x
