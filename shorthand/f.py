@@ -41,3 +41,7 @@ def is_in(x: Collection) -> _FilterBuilderType:
 
 def is_not_in(x: Collection) -> _FilterBuilderType:
     return lambda t: t not in x
+
+
+def check(t: Callable[[Any], Any], f: Callable[[Any], bool]) -> _FilterBuilderType:
+    return lambda x: f(t(x))

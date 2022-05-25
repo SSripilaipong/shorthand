@@ -39,3 +39,8 @@ def test_is_in():
 
 def test_is_not_in():
     assert list(filter(F.is_not_in(["abc", 0, 567]), [0, 123, 4, 567, 123, "abc"])) == [123, 4, 123]
+
+
+def test_check():
+    result = list(filter(F.check(lambda x: x*10, lambda x: 0 < x < 5000), [0, 123, 4, 567, 123]))
+    assert result == [123, 4, 123]
