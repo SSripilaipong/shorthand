@@ -7,3 +7,7 @@ def is_(t: Any) -> Callable[[Any], bool]:
 
 def is_not(t: Any) -> Callable[[Any], bool]:
     return lambda x: x is not t
+
+
+def eq(t: Any) -> Callable[[Any], bool]:
+    return lambda x: x == t

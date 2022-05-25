@@ -7,3 +7,7 @@ def test_is_x():
 
 def test_is_not_x():
     assert list(filter(F.is_not(123), [0, 123, 4, 567, 123])) == [0, 4, 567]
+
+
+def test_eq():
+    assert list(filter(F.eq(123), [0, 123, 4, 567, 123])) == [123, 123]
