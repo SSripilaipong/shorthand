@@ -37,3 +37,7 @@ def ge(x: Any) -> _FilterBuilderType:
 
 def is_in(x: Collection) -> _FilterBuilderType:
     return lambda t: t in x
+
+
+def is_not_in(x: Collection) -> _FilterBuilderType:
+    return lambda t: t not in x
