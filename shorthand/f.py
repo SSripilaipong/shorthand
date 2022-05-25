@@ -26,3 +26,7 @@ def lt(x: Any) -> _FilterBuilderType:
 
 def le(x: Any) -> _FilterBuilderType:
     return lambda t: t <= x
+
+
+def gt(x: Any) -> _FilterBuilderType:
+    return lambda t: t > x

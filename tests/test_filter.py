@@ -23,3 +23,7 @@ def test_lt():
 
 def test_le():
     assert list(filter(F.le(4), [0, 123, 4, 567, 123])) == [0, 4]
+
+
+def test_gt():
+    assert list(filter(F.gt(4), [0, 123, 4, 567, 123])) == [123, 567, 123]
