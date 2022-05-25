@@ -15,3 +15,7 @@ def eq(x: Any) -> Callable[[Any], bool]:
 
 def neq(x: Any) -> Callable[[Any], bool]:
     return lambda t: t != x
+
+
+def lt(x: Any) -> Callable[[Any], bool]:
+    return lambda t: t < x
