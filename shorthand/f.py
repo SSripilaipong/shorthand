@@ -1,13 +1,13 @@
 from typing import Any, Callable
 
 
-def is_(t: Any) -> Callable[[Any], bool]:
-    return lambda x: x is t
+def is_(x: Any) -> Callable[[Any], bool]:
+    return lambda t: t is x
 
 
-def is_not(t: Any) -> Callable[[Any], bool]:
-    return lambda x: x is not t
+def is_not(x: Any) -> Callable[[Any], bool]:
+    return lambda t: t is not x
 
 
-def eq(t: Any) -> Callable[[Any], bool]:
-    return lambda x: x == t
+def eq(x: Any) -> Callable[[Any], bool]:
+    return lambda t: t == x
