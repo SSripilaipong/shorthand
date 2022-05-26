@@ -3,6 +3,9 @@ from typing import Any, Callable, Collection
 from shorthand.P.proposition import Proposition
 
 
+_bool = bool
+
+
 def is_(x: Any) -> Proposition:
     return Proposition(lambda t: t is x)
 
@@ -60,3 +63,6 @@ def between(start: Any, end: Any, *, left: bool = True, right: bool = True) -> P
 def not_() -> Proposition:
     return Proposition(lambda t: not t)
 
+
+def bool() -> Proposition:
+    return Proposition(_bool)
