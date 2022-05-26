@@ -54,3 +54,9 @@ def test_getattr_with_default():
         pass
 
     assert list(map(T.getattr("v", -1), [C(1), D(), C(4)])) == [1, -1, 4]
+
+
+def test_do():
+    d = []
+    assert list(map(T.do(d.append), range(5))) == [0, 1, 2, 3, 4]
+    assert d == [0, 1, 2, 3, 4]

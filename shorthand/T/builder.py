@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Callable
 
 from shorthand.T.transformation import Transformation
 
@@ -47,3 +47,10 @@ def getattr(key: Any, default: Any = _EMPTY) -> Transformation:
     if default is _EMPTY:
         return Transformation(lambda t: _getattr(t, key))
     return Transformation(lambda t: _getattr(t, key, default))
+
+
+def do(f: Callable[[Any], Any]) -> Transformation:
+    def _do(x: Any) -> Any:
+        f(x)
+        return x
+    return Transformation(_do)
