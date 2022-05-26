@@ -84,3 +84,7 @@ def test_repeat_str():
 
 def test_getitem():
     assert list(map(T.getitem("A"), [{"A": 1, "B": 2}, {"C": 3, "A": 4}])) == [1, 4]
+
+
+def test_getitem_with_default_for_dict():
+    assert list(map(T.getitem("A", 999), [{"A": 1, "B": 2}, {}, {"C": 3, "A": 4}])) == [1, 999, 4]
