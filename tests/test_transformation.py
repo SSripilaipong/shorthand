@@ -108,3 +108,8 @@ def test_me():
 
 def test_safe():
     assert list(map(T.safe(lambda x: 0/x, 999), [-3, -1, 0, 4, 3, 0, 2, 0])) == [0, 0, 999, 0, 0, 999, 0, 999]
+
+
+def test_error():
+    result = list(map(T.error(lambda x: 0/x), [-3, -1, 0, 4, 3]))
+    assert result[:2] == [None, None] and isinstance(result[2], ZeroDivisionError) and result[3:] == [None, None]

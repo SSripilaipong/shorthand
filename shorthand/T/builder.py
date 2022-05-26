@@ -89,3 +89,13 @@ def safe(f: Callable[[Any], Any], default: Any) -> Transformation:
         except BaseException:
             return default
     return Transformation(_f)
+
+
+def error(f: Callable[[Any], Any]) -> Transformation:
+    def _f(x: Any) -> Any:
+        try:
+            f(x)
+            return None
+        except BaseException as e:
+            return e
+    return Transformation(_f)
