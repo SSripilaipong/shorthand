@@ -33,6 +33,10 @@ def test_floordiv_from():
     assert list(map(T.floordiv_from(7), [1, 2, 3])) == [7., 3., 2.]
 
 
+def test_pow():
+    assert list(map(T.pow(3), [1, 2, 3])) == [1., 8., 27.]
+
+
 def test_getattr():
     class C:
         def __init__(self, v):
