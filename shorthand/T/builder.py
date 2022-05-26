@@ -60,7 +60,7 @@ def repeat(s: str) -> Transformation:
     return Transformation(lambda n: s * n)
 
 
-def getitem(key: Any, default: Any = _EMPTY) -> Transformation:
+def get(key: Any, default: Any = _EMPTY) -> Transformation:
     if default is _EMPTY:
         return Transformation(lambda x: x[key])
     return Transformation(lambda x: x.get(key, default))
