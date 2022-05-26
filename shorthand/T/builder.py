@@ -17,3 +17,7 @@ def sub_from(x: Any) -> Transformation:
 
 def mul(x: Any) -> Transformation:
     return Transformation(lambda t: t * x)
+
+
+def div_by(x: Any) -> Transformation:
+    return Transformation(lambda t: t / x)

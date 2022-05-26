@@ -15,3 +15,7 @@ def test_sub_from():
 
 def test_mul():
     assert list(map(T.mul(2), [1, 2, 3])) == [2, 4, 6]
+
+
+def test_div_by():
+    assert list(map(T.div_by(2), [1, 2, 3])) == [.5, 1., 1.5]
