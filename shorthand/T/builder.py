@@ -5,3 +5,7 @@ from shorthand.T.transformation import Transformation
 
 def add(x: Any) -> Transformation:
     return Transformation(lambda t: t + x)
+
+
+def subtract_by(x: Any) -> Transformation:
+    return Transformation(lambda t: t - x)
