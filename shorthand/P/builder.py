@@ -47,5 +47,7 @@ def check(t: Callable[[Any], Any], f: Callable[[Any], bool]) -> Proposition:
     return Proposition(lambda x: f(t(x)))
 
 
-def between(start: Any, end: Any) -> Proposition:
+def between(start: Any, end: Any, left: bool = True) -> Proposition:
+    if not left:
+        return Proposition(lambda x: start < x <= end)
     return Proposition(lambda x: start <= x <= end)

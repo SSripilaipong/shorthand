@@ -56,3 +56,7 @@ def test_or():
 
 def test_between():
     assert list(filter(P.between(3, 7), range(10))) == [3, 4, 5, 6, 7]
+
+
+def test_between_exclude_left():
+    assert list(filter(P.between(3, 7, left=False), range(10))) == [4, 5, 6, 7]
