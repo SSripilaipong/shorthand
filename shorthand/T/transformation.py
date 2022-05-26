@@ -7,3 +7,8 @@ class Transformation:
 
     def __call__(self, x: Any) -> Any:
         return self._f(x)
+
+    def __gt__(self, other: Callable[[Any], Any]):
+        if isinstance(other, Transformation):
+            other = other._f
+        return Transformation(lambda x: other(self._f(x)))

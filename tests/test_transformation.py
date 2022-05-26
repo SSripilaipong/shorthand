@@ -60,3 +60,9 @@ def test_do():
     d = []
     assert list(map(T.do(d.append), range(5))) == [0, 1, 2, 3, 4]
     assert d == [0, 1, 2, 3, 4]
+
+
+def test_pipe():
+    d = []
+    assert list(map(T.do(d.append) > T.mul(2), range(5))) == [0, 2, 4, 6, 8]
+    assert d == [0, 1, 2, 3, 4]
