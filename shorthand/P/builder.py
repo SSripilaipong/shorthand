@@ -48,8 +48,10 @@ def check(t: Callable[[Any], Any], f: Callable[[Any], bool]) -> Proposition:
 
 
 def between(start: Any, end: Any, *, left: bool = True, right: bool = True) -> Proposition:
-    if not right:
-        return Proposition(lambda x: start <= x < end)
+    if left and right:
+        return Proposition(lambda x: start <= x <= end)
     if not left:
+        if not right:
+            return Proposition(lambda x: start < x < end)
         return Proposition(lambda x: start < x <= end)
-    return Proposition(lambda x: start <= x <= end)
+    return Proposition(lambda x: start <= x < end)
