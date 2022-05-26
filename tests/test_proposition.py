@@ -52,3 +52,7 @@ def test_and():
 
 def test_or():
     assert list(filter(P.lt(123) | P.gt(123), [0, 123, 4, 567, 123])) == [0, 4, 567]
+
+
+def test_between():
+    assert list(filter(P.between(3, 7), range(10))) == [3, 4, 5, 6, 7]

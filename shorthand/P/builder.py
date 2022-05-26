@@ -45,3 +45,7 @@ def is_not_in(x: Collection) -> Proposition:
 
 def check(t: Callable[[Any], Any], f: Callable[[Any], bool]) -> Proposition:
     return Proposition(lambda x: f(t(x)))
+
+
+def between(start: Any, end: Any) -> Proposition:
+    return Proposition(lambda x: start <= x <= end)
