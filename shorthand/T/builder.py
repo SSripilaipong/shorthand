@@ -76,3 +76,7 @@ def switch(condition: Callable[[Any], bool], true: Callable[[Any], Any], false: 
 
 def val(v: Any) -> Transformation:
     return Transformation(lambda x: v)
+
+
+def me() -> Transformation:
+    return Transformation(lambda x: x)

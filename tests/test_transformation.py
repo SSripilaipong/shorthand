@@ -100,3 +100,7 @@ def test_switch():
 
 def test_val():
     assert list(map(T.val(999), [1, 2, 3])) == [999, 999, 999]
+
+
+def test_me():
+    assert list(map(T.me(), [1, 2, 3])) == [1, 2, 3]
