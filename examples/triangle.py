@@ -2,7 +2,9 @@ from shorthand.T import *
 
 
 def main(n: int):
-    list(map(do(sub_from(n) >> repeat(" ") >> do(print, end="")) >> do(repeat("*") >> do(print)), range(1, n+1)))
+    print_triangle = do(sub_from(n) >> repeat(" ") >> do(print, end="")) >> \
+                     do(repeat("*") >> do(print))
+    list(map(print_triangle, range(1, n+1)))
 
 
 if __name__ == "__main__":
