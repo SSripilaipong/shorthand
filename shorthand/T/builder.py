@@ -49,9 +49,9 @@ def getattr(key: Any, default: Any = _EMPTY) -> Transformation:
     return Transformation(lambda t: _getattr(t, key, default))
 
 
-def do(f: Callable[[Any], Any]) -> Transformation:
+def do(f: Callable, *args, **kwargs) -> Transformation:
     def _do(x: Any) -> Any:
-        f(x)
+        f(x, *args, **kwargs)
         return x
     return Transformation(_do)
 

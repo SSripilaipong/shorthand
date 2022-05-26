@@ -62,6 +62,16 @@ def test_do():
     assert d == [0, 1, 2, 3, 4]
 
 
+def test_do_with_params():
+    class M:
+        def __call__(self, x, p, q):
+            self.params = x, p, q
+
+    m = M()
+    list(map(T.do(m, 1, q=True), ["x"]))
+    assert m.params == ("x", 1, True)
+
+
 def test_pipe():
     d = []
     assert list(map(T.do(d.append) > T.mul(2), range(5))) == [0, 2, 4, 6, 8]
