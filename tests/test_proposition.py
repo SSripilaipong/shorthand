@@ -48,3 +48,7 @@ def test_check():
 
 def test_and():
     assert list(filter(P.ge(4) & P.lt(567), [0, 123, 4, 567, 123])) == [123, 4, 123]
+
+
+def test_or():
+    assert list(filter(P.lt(123) | P.gt(123), [0, 123, 4, 567, 123])) == [0, 4, 567]

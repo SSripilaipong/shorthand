@@ -10,3 +10,6 @@ class Proposition:
 
     def __and__(self, other: 'Proposition') -> 'Proposition':
         return Proposition(lambda x: self(x) & other(x))
+
+    def __or__(self, other: 'Proposition') -> 'Proposition':
+        return Proposition(lambda x: self(x) | other(x))
