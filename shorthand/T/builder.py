@@ -21,3 +21,7 @@ def mul(x: Any) -> Transformation:
 
 def div_by(x: Any) -> Transformation:
     return Transformation(lambda t: t / x)
+
+
+def div_from(x: Any) -> Transformation:
+    return Transformation(lambda t: x / t)

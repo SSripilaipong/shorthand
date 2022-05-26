@@ -19,3 +19,7 @@ def test_mul():
 
 def test_div_by():
     assert list(map(T.div_by(2), [1, 2, 3])) == [.5, 1., 1.5]
+
+
+def test_div_from():
+    assert list(map(T.div_from(6), [1, 2, 3])) == [6., 3., 2.]
