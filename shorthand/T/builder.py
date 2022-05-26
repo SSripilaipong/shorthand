@@ -72,3 +72,7 @@ def getitem(key: Any) -> Transformation:
 
 def switch(condition: Callable[[Any], bool], true: Callable[[Any], Any], false: Callable[[Any], Any]) -> Transformation:
     return Transformation(lambda x: true(x) if condition(x) else false(x))
+
+
+def val(v: Any) -> Transformation:
+    return Transformation(lambda x: v)

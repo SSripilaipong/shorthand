@@ -96,3 +96,7 @@ def test_getitem():
 
 def test_switch():
     assert list(map(T.switch(lambda x: x > 0, lambda x: 1, lambda x: -1), [-1, 9, 4, -4])) == [-1, 1, 1, -1]
+
+
+def test_val():
+    assert list(map(T.val(999), [1, 2, 3])) == [999, 999, 999]
