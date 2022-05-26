@@ -54,3 +54,7 @@ def do(f: Callable[[Any], Any]) -> Transformation:
         f(x)
         return x
     return Transformation(_do)
+
+
+def repeat(s: str) -> Transformation:
+    return Transformation(lambda n: s * n)

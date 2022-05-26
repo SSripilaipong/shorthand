@@ -66,3 +66,7 @@ def test_pipe():
     d = []
     assert list(map(T.do(d.append) > T.mul(2), range(5))) == [0, 2, 4, 6, 8]
     assert d == [0, 1, 2, 3, 4]
+
+
+def test_repeat_str():
+    assert list(map(T.repeat("*"), range(3))) == ["", "*", "**"]
