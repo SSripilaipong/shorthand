@@ -3,7 +3,8 @@ from shorthand.T import *
 
 def main(n: int):
     list(map(
-        do(do(print, "A") > do(print, "B") > do(print, "C")),
+        do(sub_from(n) >> repeat(" ") >> do(print, end="")) >>
+        do(repeat("*") >> do(print)),
         range(1, n+1)))
 
 

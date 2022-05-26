@@ -74,7 +74,7 @@ def test_do_with_params():
 
 def test_pipe():
     d = []
-    assert list(map(T.do(d.append) > T.mul(2), range(5))) == [0, 2, 4, 6, 8]
+    assert list(map(T.do(d.append) >> T.mul(2), range(5))) == [0, 2, 4, 6, 8]
     assert d == [0, 1, 2, 3, 4]
 
 
