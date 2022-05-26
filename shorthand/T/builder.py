@@ -4,6 +4,8 @@ from shorthand.T.transformation import Transformation
 
 
 _getattr = getattr
+_EMPTY = type("_EMPTY", (), {})()
+
 
 def add(x: Any) -> Transformation:
     return Transformation(lambda t: t + x)
@@ -37,5 +39,7 @@ def floordiv_from(x: Any) -> Transformation:
     return Transformation(lambda t: x // t)
 
 
-def getattr(key: Any) -> Transformation:
-    return Transformation(lambda t: _getattr(t, key))
+def getattr(key: Any, default: Any = _EMPTY) -> Transformation:
+    if default is _EMPTY:
+        return Transformation(lambda t: _getattr(t, key))
+    return Transformation(lambda t: _getattr(t, key, default))

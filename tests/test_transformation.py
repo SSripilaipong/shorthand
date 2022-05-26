@@ -39,3 +39,14 @@ def test_getattr():
             self.v = v
 
     assert list(map(T.getattr("v"), [C(1), C(4)])) == [1, 4]
+
+
+def test_getattr_with_default():
+    class C:
+        def __init__(self, v):
+            self.v = v
+
+    class D:
+        pass
+
+    assert list(map(T.getattr("v", -1), [C(1), D(), C(4)])) == [1, -1, 4]
