@@ -11,3 +11,7 @@ def test_sub_by():
 
 def test_sub_from():
     assert list(map(T.sub_from(1), [1, 2, 3])) == [0, -1, -2]
+
+
+def test_mul():
+    assert list(map(T.mul(2), [1, 2, 3])) == [2, 4, 6]

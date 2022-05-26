@@ -13,3 +13,7 @@ def sub_by(x: Any) -> Transformation:
 
 def sub_from(x: Any) -> Transformation:
     return Transformation(lambda t: x - t)
+
+
+def mul(x: Any) -> Transformation:
+    return Transformation(lambda t: t * x)
