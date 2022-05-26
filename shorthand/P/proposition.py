@@ -9,7 +9,10 @@ class Proposition:
         return self._f(x)
 
     def __and__(self, other: 'Proposition') -> 'Proposition':
-        return Proposition(lambda x: self(x) & other(x))
+        return Proposition(lambda x: self._f(x) & other._f(x))
 
     def __or__(self, other: 'Proposition') -> 'Proposition':
-        return Proposition(lambda x: self(x) | other(x))
+        return Proposition(lambda x: self._f(x) | other._f(x))
+
+    def __invert__(self) -> 'Proposition':
+        return Proposition(lambda x: not self._f(x))

@@ -76,3 +76,7 @@ def test_not_():
 
 def test_bool():
     assert list(filter(P.bool(), [True, 0, 1, "", "abc"])) == [True, 1, "abc"]
+
+
+def test_not():
+    assert list(filter(~P.gt(5), range(10))) == [0, 1, 2, 3, 4, 5]
