@@ -1,46 +1,46 @@
-from shorthand import F
+from shorthand import P
 
 
 def test_is_x():
-    assert list(filter(F.is_(123), [0, 123, 4, 567, 123])) == [123, 123]
+    assert list(filter(P.is_(123), [0, 123, 4, 567, 123])) == [123, 123]
 
 
 def test_is_not_x():
-    assert list(filter(F.is_not(123), [0, 123, 4, 567, 123])) == [0, 4, 567]
+    assert list(filter(P.is_not(123), [0, 123, 4, 567, 123])) == [0, 4, 567]
 
 
 def test_eq():
-    assert list(filter(F.eq(123), [0, 123, 4, 567, 123])) == [123, 123]
+    assert list(filter(P.eq(123), [0, 123, 4, 567, 123])) == [123, 123]
 
 
 def test_neq():
-    assert list(filter(F.neq(123), [0, 123, 4, 567, 123])) == [0, 4, 567]
+    assert list(filter(P.neq(123), [0, 123, 4, 567, 123])) == [0, 4, 567]
 
 
 def test_lt():
-    assert list(filter(F.lt(50), [0, 123, 4, 567, 123])) == [0, 4]
+    assert list(filter(P.lt(50), [0, 123, 4, 567, 123])) == [0, 4]
 
 
 def test_le():
-    assert list(filter(F.le(4), [0, 123, 4, 567, 123])) == [0, 4]
+    assert list(filter(P.le(4), [0, 123, 4, 567, 123])) == [0, 4]
 
 
 def test_gt():
-    assert list(filter(F.gt(4), [0, 123, 4, 567, 123])) == [123, 567, 123]
+    assert list(filter(P.gt(4), [0, 123, 4, 567, 123])) == [123, 567, 123]
 
 
 def test_ge():
-    assert list(filter(F.ge(123), [0, 123, 4, 567, 123])) == [123, 567, 123]
+    assert list(filter(P.ge(123), [0, 123, 4, 567, 123])) == [123, 567, 123]
 
 
 def test_is_in():
-    assert list(filter(F.is_in(["abc", 0, 567]), [0, 123, 4, 567, 123, "abc"])) == [0, 567, "abc"]
+    assert list(filter(P.is_in(["abc", 0, 567]), [0, 123, 4, 567, 123, "abc"])) == [0, 567, "abc"]
 
 
 def test_is_not_in():
-    assert list(filter(F.is_not_in(["abc", 0, 567]), [0, 123, 4, 567, 123, "abc"])) == [123, 4, 123]
+    assert list(filter(P.is_not_in(["abc", 0, 567]), [0, 123, 4, 567, 123, "abc"])) == [123, 4, 123]
 
 
 def test_check():
-    result = list(filter(F.check(lambda x: x*10, lambda x: 0 < x < 5000), [0, 123, 4, 567, 123]))
+    result = list(filter(P.check(lambda x: x * 10, lambda x: 0 < x < 5000), [0, 123, 4, 567, 123]))
     assert result == [123, 4, 123]
