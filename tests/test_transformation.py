@@ -92,3 +92,7 @@ def test_get_with_default():
 
 def test_getitem():
     assert list(map(T.getitem(1), [[0, 1], [2, 3, 4], [5, 6]])) == [1, 3, 6]
+
+
+def test_switch():
+    assert list(map(T.switch(lambda x: x > 0, lambda x: 1, lambda x: -1), [-1, 9, 4, -4])) == [-1, 1, 1, -1]
