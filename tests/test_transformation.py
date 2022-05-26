@@ -80,3 +80,7 @@ def test_pipe():
 
 def test_repeat_str():
     assert list(map(T.repeat("*"), range(3))) == ["", "*", "**"]
+
+
+def test_getitem():
+    assert list(map(T.getitem("A"), [{"A": 1, "B": 2}, {"C": 3, "A": 4}])) == [1, 4]

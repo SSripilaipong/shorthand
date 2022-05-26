@@ -58,3 +58,7 @@ def do(f: Callable, *args, **kwargs) -> Transformation:
 
 def repeat(s: str) -> Transformation:
     return Transformation(lambda n: s * n)
+
+
+def getitem(key: Any) -> Transformation:
+    return Transformation(lambda x: x[key])
