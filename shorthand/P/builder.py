@@ -55,3 +55,8 @@ def between(start: Any, end: Any, *, left: bool = True, right: bool = True) -> P
             return Proposition(lambda x: start < x < end)
         return Proposition(lambda x: start < x <= end)
     return Proposition(lambda x: start <= x < end)
+
+
+def not_() -> Proposition:
+    return Proposition(lambda t: not t)
+
