@@ -88,3 +88,7 @@ def test_get():
 
 def test_get_with_default():
     assert list(map(T.get("A", 999), [{"A": 1, "B": 2}, {}, {"C": 3, "A": 4}])) == [1, 999, 4]
+
+
+def test_getitem():
+    assert list(map(T.getitem(1), [[0, 1], [2, 3, 4], [5, 6]])) == [1, 3, 6]

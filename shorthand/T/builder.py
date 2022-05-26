@@ -64,3 +64,7 @@ def get(key: Any, default: Any = _EMPTY) -> Transformation:
     if default is _EMPTY:
         return Transformation(lambda x: x[key])
     return Transformation(lambda x: x.get(key, default))
+
+
+def getitem(key: Any) -> Transformation:
+    return Transformation(lambda x: x[key])
