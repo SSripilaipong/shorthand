@@ -23,3 +23,7 @@ def test_div_by():
 
 def test_div_from():
     assert list(map(T.div_from(6), [1, 2, 3])) == [6., 3., 2.]
+
+
+def test_floordiv_by():
+    assert list(map(T.floordiv_by(2), [1, 2, 3])) == [0., 1., 1.]

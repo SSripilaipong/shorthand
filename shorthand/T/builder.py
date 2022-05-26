@@ -25,3 +25,7 @@ def div_by(x: Any) -> Transformation:
 
 def div_from(x: Any) -> Transformation:
     return Transformation(lambda t: x / t)
+
+
+def floordiv_by(x: Any) -> Transformation:
+    return Transformation(lambda t: t // x)
