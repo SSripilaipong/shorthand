@@ -7,3 +7,6 @@ class Proposition:
 
     def __call__(self, x: Any) -> bool:
         return self._f(x)
+
+    def __and__(self, other: 'Proposition') -> 'Proposition':
+        return Proposition(lambda x: self(x) & other(x))

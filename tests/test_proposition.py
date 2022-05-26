@@ -44,3 +44,7 @@ def test_is_not_in():
 def test_check():
     result = list(filter(P.check(lambda x: x * 10, lambda x: 0 < x < 5000), [0, 123, 4, 567, 123]))
     assert result == [123, 4, 123]
+
+
+def test_and():
+    assert list(filter(P.ge(4) & P.lt(567), [0, 123, 4, 567, 123])) == [123, 4, 123]
