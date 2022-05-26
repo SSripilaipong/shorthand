@@ -104,3 +104,7 @@ def test_val():
 
 def test_me():
     assert list(map(T.me(), [1, 2, 3])) == [1, 2, 3]
+
+
+def test_safe():
+    assert list(map(T.safe(lambda x: 0/x, 999), [-3, -1, 0, 4, 3, 0, 2, 0])) == [0, 0, 999, 0, 0, 999, 0, 999]

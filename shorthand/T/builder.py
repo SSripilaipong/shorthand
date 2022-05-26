@@ -80,3 +80,12 @@ def val(v: Any) -> Transformation:
 
 def me() -> Transformation:
     return Transformation(lambda x: x)
+
+
+def safe(f: Callable[[Any], Any], default: Any) -> Transformation:
+    def _f(x: Any) -> Any:
+        try:
+            return f(x)
+        except BaseException:
+            return default
+    return Transformation(_f)
