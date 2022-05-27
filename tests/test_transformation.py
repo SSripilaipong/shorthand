@@ -37,15 +37,15 @@ def test_pow():
     assert list(map(T.pow(3), [1, 2, 3])) == [1., 8., 27.]
 
 
-def test_getattr():
+def test_attr():
     class C:
         def __init__(self, v):
             self.v = v
 
-    assert list(map(T.getattr("v"), [C(1), C(4)])) == [1, 4]
+    assert list(map(T.attr("v"), [C(1), C(4)])) == [1, 4]
 
 
-def test_getattr_with_default():
+def test_attr_with_default():
     class C:
         def __init__(self, v):
             self.v = v
@@ -53,7 +53,7 @@ def test_getattr_with_default():
     class D:
         pass
 
-    assert list(map(T.getattr("v", -1), [C(1), D(), C(4)])) == [1, -1, 4]
+    assert list(map(T.attr("v", -1), [C(1), D(), C(4)])) == [1, -1, 4]
 
 
 def test_do():

@@ -43,7 +43,7 @@ def pow(x: Any) -> Transformation:
     return Transformation(lambda t: t ** x)
 
 
-def getattr(key: Any, default: Any = _EMPTY) -> Transformation:
+def attr(key: Any, default: Any = _EMPTY) -> Transformation:
     if default is _EMPTY:
         return Transformation(lambda t: _getattr(t, key))
     return Transformation(lambda t: _getattr(t, key, default))
