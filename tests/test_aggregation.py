@@ -17,3 +17,7 @@ def test_attribute_level_aggregation():
 
 def test_new():
     assert reduce(A.new(), range(10)) == 9
+
+
+def test_current():
+    assert reduce(A.current(), range(3, 7)) == 3
