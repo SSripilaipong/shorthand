@@ -1,10 +1,11 @@
 from collections import defaultdict
-from typing import Any, Callable, Dict
+from typing import Any, Callable, Dict, Union, List
 
 from shorthand.transformation.transformation import Transformation
 
 
 _EMPTY = type("_EMPTY", (), {})()
+PROJECT_TEMPLATE = Union[Dict[Any, Callable[[Any], Any]], List[Callable[[Any], Any]]]
 
 
 class TransformationBuilder:
@@ -105,9 +106,13 @@ class TransformationBuilder:
 
         return Transformation(_f)
 
-    def project(self, template: Dict[Any, Callable[[Any], Any]]) -> Transformation:
-        def _f(x: Any) -> Any:
-            return {key: t(x) for key, t in template.items()}
+    def project(self, template: PROJECT_TEMPLATE) -> Transformation:
+        if isinstance(template, dict):
+            def _f(x: Any) -> Any:
+                return {key: t(x) for key, t in template.items()}
+        else:
+            def _f(x: Any) -> Any:
+                return [t(x) for t in template]
         return self._build(_f)
 
 

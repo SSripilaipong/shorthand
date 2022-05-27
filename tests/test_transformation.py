@@ -136,3 +136,8 @@ def test_wrap_in_dict_with_default_value():
 def test_project_to_dict():
     result = list(map(T.project({"a": T.me(), "b": T.add(10)}), range(3)))
     assert result == [{"a": 0, "b": 10}, {"a": 1, "b": 11}, {"a": 2, "b": 12}]
+
+
+def test_project_to_list():
+    result = list(map(T.project([T.me(), T.add(10)]), range(3)))
+    assert result == [[0, 10], [1, 11], [2, 12]]
