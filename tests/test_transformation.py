@@ -141,3 +141,8 @@ def test_project_to_dict():
 def test_project_to_list():
     result = list(map(T.project([T.me(), T.add(10)]), range(3)))
     assert result == [[0, 10], [1, 11], [2, 12]]
+
+
+def test_project_to_tuple():
+    result = list(map(T.project((T.me(), T.add(10))), range(3)))
+    assert result == [(0, 10), (1, 11), (2, 12)]

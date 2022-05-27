@@ -1,11 +1,11 @@
 from collections import defaultdict
-from typing import Any, Callable, Dict, Union, List
+from typing import Any, Callable, Dict, Union, Sequence
 
 from shorthand.transformation.transformation import Transformation
 
 
 _EMPTY = type("_EMPTY", (), {})()
-PROJECT_TEMPLATE = Union[Dict[Any, Callable[[Any], Any]], List[Callable[[Any], Any]]]
+PROJECTION = Union[Dict[Any, Callable[[Any], Any]], Sequence[Callable[[Any], Any]]]
 
 
 class TransformationBuilder:
@@ -106,13 +106,20 @@ class TransformationBuilder:
 
         return Transformation(_f)
 
-    def project(self, template: PROJECT_TEMPLATE) -> Transformation:
+    def project(self, template: PROJECTION) -> Transformation:
         if isinstance(template, dict):
+            items = template.items()
+
             def _f(x: Any) -> Any:
-                return {key: t(x) for key, t in template.items()}
-        else:
+                return {key: t(x) for key, t in items}
+        elif isinstance(template, list):
             def _f(x: Any) -> Any:
                 return [t(x) for t in template]
+        elif isinstance(template, tuple):
+            def _f(x: Any) -> Any:
+                return tuple([t(x) for t in template])
+        else:
+            raise TypeError(f"Cannot use {template} as projection")
         return self._build(_f)
 
 
