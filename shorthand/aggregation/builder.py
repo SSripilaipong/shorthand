@@ -22,6 +22,12 @@ class AggregationBuilder:
     def current(self) -> Aggregation:
         return self._build(lambda current, new: current)
 
+    def append(self) -> Aggregation:
+        def _f(current: Any, new: Any) -> Any:
+            current.append(new)
+            return current
+        return self._build(_f)
+
     def __getitem__(self, key: Any) -> 'AggregationBuilder':
         return AggregationBuilder(key)
 

@@ -33,3 +33,7 @@ def test_pipe_in():
 
 def test_pipe_out():
     assert reduce(A.add() >> (lambda new: new*2), range(6)) == 114
+
+
+def test_append():
+    assert reduce(A.append(), range(6), []) == [0, 1, 2, 3, 4, 5]
