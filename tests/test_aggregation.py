@@ -29,3 +29,7 @@ def test_attribute_separated_operations():
 
 def test_pipe_in():
     assert reduce(A.add() << (lambda new: new*2), range(6)) == 30
+
+
+def test_pipe_out():
+    assert reduce(A.add() >> (lambda new: new*2), range(6)) == 114

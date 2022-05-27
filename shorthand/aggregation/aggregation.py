@@ -24,3 +24,9 @@ class Aggregation:
         g = other._f if isinstance(other, Transformation) else other
 
         return Aggregation(lambda current, new: f(current, g(new)))
+
+    def __rshift__(self, other: Callable[[Any], Any]) -> 'Aggregation':
+        f = self._f
+        g = other._f if isinstance(other, Transformation) else other
+
+        return Aggregation(lambda current, new: g(f(current, new)))
