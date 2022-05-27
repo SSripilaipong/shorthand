@@ -13,3 +13,7 @@ def test_mul():
 
 def test_attribute_level_aggregation():
     assert reduce(A["x"].add(), range(4), {"x": 3}) == {"x": 9}
+
+
+def test_new():
+    assert reduce(A.new(), range(10)) == 9

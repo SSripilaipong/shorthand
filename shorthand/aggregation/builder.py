@@ -16,6 +16,9 @@ class AggregationBuilder:
     def mul(self) -> Aggregation:
         return self._build(lambda current, new: current * new)
 
+    def new(self) -> Aggregation:
+        return self._build(lambda current, new: new)
+
     def __getitem__(self, key: Any) -> 'AggregationBuilder':
         return AggregationBuilder(key)
 
