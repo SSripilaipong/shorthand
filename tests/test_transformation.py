@@ -117,3 +117,8 @@ def test_error():
 
 def test_attribute_level_transformation():
     assert list(map(T["a"].add(1), [{"a": 0}, {"a": 1}])) == [{"a": 1}, {"a": 2}]
+
+
+def test_attribute_level_transformation_with_pipe():
+    result = list(map(T["a"].add(1) >> T["b"].sub_by(2), [{"a": 0, "b": 4}, {"a": 1, "b": 5}]))
+    assert result == [{"a": 1, "b": 2}, {"a": 2, "b": 3}]
