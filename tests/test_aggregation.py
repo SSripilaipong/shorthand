@@ -21,3 +21,7 @@ def test_new():
 
 def test_current():
     assert reduce(A.current(), range(3, 7)) == 3
+
+
+def test_attribute_separated_operations():
+    assert reduce(A["a"].add() | A["b"].mul(), range(1, 6), {"a": 0, "b": 1}) == {"a": 15, "b": 120}
