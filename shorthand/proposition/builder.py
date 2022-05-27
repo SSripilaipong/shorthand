@@ -3,7 +3,13 @@ from typing import Any, Callable, Collection
 from shorthand.proposition.proposition import Proposition
 
 
+_EMPTY = type("_EMPTY", (), {})()
+
+
 class PropositionBuilder:
+    def __init__(self, key: Any = _EMPTY):
+        self._key = key
+
     def is_(self, x: Any) -> Proposition:
         return self._build(lambda t: t is x)
 
@@ -50,7 +56,12 @@ class PropositionBuilder:
         return self._build(lambda t: not t)
 
     def _build(self, f: Callable[[Any], bool]) -> Proposition:
-        return Proposition(f)
+        if self._key is _EMPTY:
+            return Proposition(f)
+        return Proposition(lambda x: f(x[self._key]))
+
+    def __getitem__(self, key: Any) -> 'PropositionBuilder':
+        return PropositionBuilder(key)
 
     def bool(self) -> Proposition:
         return self._build(bool)

@@ -80,3 +80,7 @@ def test_bool():
 
 def test_not():
     assert list(filter(~P.gt(5), range(10))) == [0, 1, 2, 3, 4, 5]
+
+
+def test_attribute_level_proposition():
+    assert list(filter(P["a"].lt(1), [{"a": 0}, {"a": 1}])) == [{"a": 0}]
