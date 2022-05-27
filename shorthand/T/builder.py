@@ -56,7 +56,8 @@ class TransformationBuilder:
     def item(self, key: Any) -> Transformation:
         return self._build(lambda x: x[key])
 
-    def select(self, condition: Callable[[Any], bool], true: Callable[[Any], Any], false: Callable[[Any], Any]) -> Transformation:
+    def select(self, condition: Callable[[Any], bool], true: Callable[[Any], Any], false: Callable[[Any], Any]) \
+            -> Transformation:
         return self._build(lambda x: true(x) if condition(x) else false(x))
 
     def val(self, v: Any) -> Transformation:
