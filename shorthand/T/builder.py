@@ -3,99 +3,87 @@ from typing import Any, Callable
 from shorthand.T.transformation import Transformation
 
 
-_getattr = getattr
 _EMPTY = type("_EMPTY", (), {})()
 
 
-def add(x: Any) -> Transformation:
-    return Transformation(lambda t: t + x)
+class TransformationBuilder:
+    def add(self, x: Any) -> Transformation:
+        return self._build(lambda t: t + x)
+
+    def sub_by(self, x: Any) -> Transformation:
+        return self._build(lambda t: t - x)
+
+    def sub_from(self, x: Any) -> Transformation:
+        return self._build(lambda t: x - t)
+
+    def mul(self, x: Any) -> Transformation:
+        return self._build(lambda t: t * x)
+
+    def div_by(self, x: Any) -> Transformation:
+        return self._build(lambda t: t / x)
+
+    def div_from(self, x: Any) -> Transformation:
+        return self._build(lambda t: x / t)
+
+    def floordiv_by(self, x: Any) -> Transformation:
+        return self._build(lambda t: t // x)
+
+    def floordiv_from(self, x: Any) -> Transformation:
+        return self._build(lambda t: x // t)
+
+    def pow(self, x: Any) -> Transformation:
+        return self._build(lambda t: t ** x)
+
+    def attr(self, key: Any, default: Any = _EMPTY) -> Transformation:
+        if default is _EMPTY:
+            return Transformation(lambda t: getattr(t, key))
+        return self._build(lambda t: getattr(t, key, default))
+
+    def do(self, f: Callable, *args, **kwargs) -> Transformation:
+        def _do(x: Any) -> Any:
+            f(x, *args, **kwargs)
+            return x
+        return self._build(_do)
+
+    def repeat(self, s: str) -> Transformation:
+        return self._build(lambda n: s * n)
+
+    def get(self, key: Any, default: Any = _EMPTY) -> Transformation:
+        if default is _EMPTY:
+            return Transformation(lambda x: x[key])
+        return self._build(lambda x: x.get(key, default))
+
+    def item(self, key: Any) -> Transformation:
+        return self._build(lambda x: x[key])
+
+    def select(self, condition: Callable[[Any], bool], true: Callable[[Any], Any], false: Callable[[Any], Any]) -> Transformation:
+        return self._build(lambda x: true(x) if condition(x) else false(x))
+
+    def val(self, v: Any) -> Transformation:
+        return self._build(lambda x: v)
+
+    def me(self) -> Transformation:
+        return self._build(lambda x: x)
+
+    def safe(self, f: Callable[[Any], Any], default: Any) -> Transformation:
+        def _f(x: Any) -> Any:
+            try:
+                return f(x)
+            except BaseException:
+                return default
+        return self._build(_f)
+
+    def error(self, f: Callable[[Any], Any]) -> Transformation:
+        def _f(x: Any) -> Any:
+            try:
+                f(x)
+                return None
+            except BaseException as e:
+                return e
+        return self._build(_f)
+
+    def _build(self, f: Callable[[Any], Any]) -> Transformation:
+        return Transformation(f)
 
 
-def sub_by(x: Any) -> Transformation:
-    return Transformation(lambda t: t - x)
-
-
-def sub_from(x: Any) -> Transformation:
-    return Transformation(lambda t: x - t)
-
-
-def mul(x: Any) -> Transformation:
-    return Transformation(lambda t: t * x)
-
-
-def div_by(x: Any) -> Transformation:
-    return Transformation(lambda t: t / x)
-
-
-def div_from(x: Any) -> Transformation:
-    return Transformation(lambda t: x / t)
-
-
-def floordiv_by(x: Any) -> Transformation:
-    return Transformation(lambda t: t // x)
-
-
-def floordiv_from(x: Any) -> Transformation:
-    return Transformation(lambda t: x // t)
-
-
-def pow(x: Any) -> Transformation:
-    return Transformation(lambda t: t ** x)
-
-
-def attr(key: Any, default: Any = _EMPTY) -> Transformation:
-    if default is _EMPTY:
-        return Transformation(lambda t: _getattr(t, key))
-    return Transformation(lambda t: _getattr(t, key, default))
-
-
-def do(f: Callable, *args, **kwargs) -> Transformation:
-    def _do(x: Any) -> Any:
-        f(x, *args, **kwargs)
-        return x
-    return Transformation(_do)
-
-
-def repeat(s: str) -> Transformation:
-    return Transformation(lambda n: s * n)
-
-
-def get(key: Any, default: Any = _EMPTY) -> Transformation:
-    if default is _EMPTY:
-        return Transformation(lambda x: x[key])
-    return Transformation(lambda x: x.get(key, default))
-
-
-def item(key: Any) -> Transformation:
-    return Transformation(lambda x: x[key])
-
-
-def select(condition: Callable[[Any], bool], true: Callable[[Any], Any], false: Callable[[Any], Any]) -> Transformation:
-    return Transformation(lambda x: true(x) if condition(x) else false(x))
-
-
-def val(v: Any) -> Transformation:
-    return Transformation(lambda x: v)
-
-
-def me() -> Transformation:
-    return Transformation(lambda x: x)
-
-
-def safe(f: Callable[[Any], Any], default: Any) -> Transformation:
-    def _f(x: Any) -> Any:
-        try:
-            return f(x)
-        except BaseException:
-            return default
-    return Transformation(_f)
-
-
-def error(f: Callable[[Any], Any]) -> Transformation:
-    def _f(x: Any) -> Any:
-        try:
-            f(x)
-            return None
-        except BaseException as e:
-            return e
-    return Transformation(_f)
+T = TransformationBuilder()
