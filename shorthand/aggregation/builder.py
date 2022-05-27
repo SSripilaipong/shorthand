@@ -10,8 +10,10 @@ class AggregationBuilder:
     def __init__(self, key: Any = _EMPTY):
         self._key = key
 
-    def add(self) -> Aggregation:
-        return self._build(lambda current, new: current + new)
+    def add(self, value: Any = _EMPTY) -> Aggregation:
+        if value is _EMPTY:
+            return self._build(lambda current, new: current + new)
+        return self._build(lambda current, new: current + value)
 
     def mul(self) -> Aggregation:
         return self._build(lambda current, new: current * new)

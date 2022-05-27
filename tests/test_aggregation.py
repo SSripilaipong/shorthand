@@ -33,3 +33,7 @@ def test_pipe_in():
 
 def test_pipe_out():
     assert reduce(A.add() >> (lambda new: new*2), range(6)) == 114
+
+
+def test_add_with_value():
+    assert reduce(A.add(1), range(9, 19), 0) == 10
