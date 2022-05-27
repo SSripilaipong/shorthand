@@ -113,3 +113,7 @@ def test_safe():
 def test_error():
     result = list(map(T.error(lambda x: 0/x), [-3, -1, 0, 4, 3]))
     assert result[:2] == [None, None] and isinstance(result[2], ZeroDivisionError) and result[3:] == [None, None]
+
+
+def test_attribute_level_transformation():
+    assert list(map(T["a"].add(1), [{"a": 0}, {"a": 1}])) == [{"a": 1}, {"a": 2}]

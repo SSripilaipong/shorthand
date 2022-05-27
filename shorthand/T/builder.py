@@ -7,6 +7,9 @@ _EMPTY = type("_EMPTY", (), {})()
 
 
 class TransformationBuilder:
+    def __init__(self, key: Any = _EMPTY):
+        self._key = key
+
     def add(self, x: Any) -> Transformation:
         return self._build(lambda t: t + x)
 
@@ -83,8 +86,18 @@ class TransformationBuilder:
                 return e
         return self._build(_f)
 
+    def __getitem__(self, key: Any) -> 'TransformationBuilder':
+        return TransformationBuilder(key)
+
     def _build(self, f: Callable[[Any], Any]) -> Transformation:
-        return Transformation(f)
+        if self._key is _EMPTY:
+            return Transformation(f)
+
+        def _f(x: Any) -> Any:
+            x[self._key] = f(x[self._key])
+            return x
+
+        return Transformation(_f)
 
 
 T = TransformationBuilder()
