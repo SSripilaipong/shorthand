@@ -1,6 +1,6 @@
 from typing import Any, Callable
 
-from shorthand.T.transformation import Transformation
+from shorthand.transformation.transformation import Transformation
 
 
 _EMPTY = type("_EMPTY", (), {})()
@@ -86,6 +86,9 @@ class TransformationBuilder:
                 return e
         return self._build(_f)
 
+    def wrap(self, key: Any) -> Transformation:
+        return self._build(lambda x: {key: x})
+
     def __getitem__(self, key: Any) -> 'TransformationBuilder':
         return TransformationBuilder(key)
 
@@ -100,4 +103,4 @@ class TransformationBuilder:
         return Transformation(_f)
 
 
-T = TransformationBuilder()
+T: TransformationBuilder = TransformationBuilder()
