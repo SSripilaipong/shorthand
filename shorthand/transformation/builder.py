@@ -1,5 +1,5 @@
 from collections import defaultdict
-from typing import Any, Callable
+from typing import Any, Callable, Dict
 
 from shorthand.transformation.transformation import Transformation
 
@@ -104,6 +104,11 @@ class TransformationBuilder:
             return x
 
         return Transformation(_f)
+
+    def project(self, template: Dict[Any, Callable[[Any], Any]]) -> Transformation:
+        def _f(x: Any) -> Any:
+            return {key: t(x) for key, t in template.items()}
+        return self._build(_f)
 
 
 T: TransformationBuilder = TransformationBuilder()

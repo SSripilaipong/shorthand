@@ -131,3 +131,8 @@ def test_wrap_in_dict():
 def test_wrap_in_dict_with_default_value():
     result = list(map(T.wrap("a", 999) >> T["b"].sub_by(900), [1, 2]))
     assert result == [{"a": 1, "b": 99}, {"a": 2, "b": 99}]
+
+
+def test_project_to_dict():
+    result = list(map(T.project({"a": T.me(), "b": T.add(10)}), range(3)))
+    assert result == [{"a": 0, "b": 10}, {"a": 1, "b": 11}, {"a": 2, "b": 12}]
