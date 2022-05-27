@@ -37,3 +37,7 @@ def test_pipe_out():
 
 def test_append():
     assert reduce(A.append(), range(6), []) == [0, 1, 2, 3, 4, 5]
+
+
+def test_unique():
+    assert reduce(A.unique(), [1, 0, 1, 1, 0, 0], set()) == {0, 1}

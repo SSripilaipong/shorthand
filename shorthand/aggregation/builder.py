@@ -28,6 +28,12 @@ class AggregationBuilder:
             return current
         return self._build(_f)
 
+    def unique(self) -> Aggregation:
+        def _f(current: Any, new: Any) -> Any:
+            current.add(new)
+            return current
+        return self._build(_f)
+
     def __getitem__(self, key: Any) -> 'AggregationBuilder':
         return AggregationBuilder(key)
 
