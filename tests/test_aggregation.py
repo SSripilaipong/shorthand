@@ -25,3 +25,7 @@ def test_current():
 
 def test_attribute_separated_operations():
     assert reduce(A["a"].add() | A["b"].mul(), range(1, 6), {"a": 0, "b": 1}) == {"a": 15, "b": 120}
+
+
+def test_pipe_in():
+    assert reduce(A.add() << (lambda new: new*2), range(6)) == 30

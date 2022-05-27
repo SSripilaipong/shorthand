@@ -1,5 +1,7 @@
 from typing import Any, Callable
 
+from shorthand.transformation.transformation import Transformation
+
 
 class Aggregation:
     def __init__(self, f: Callable[[Any, Any], Any]):
@@ -16,3 +18,9 @@ class Aggregation:
             return g(f(current, new), new)
 
         return Aggregation(_f)
+
+    def __lshift__(self, other: Callable[[Any], Any]) -> 'Aggregation':
+        f = self._f
+        g = other._f if isinstance(other, Transformation) else other
+
+        return Aggregation(lambda current, new: f(current, g(new)))
