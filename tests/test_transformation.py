@@ -126,3 +126,8 @@ def test_attribute_level_transformation_with_pipe():
 
 def test_wrap_in_dict():
     assert list(map(T.wrap("a"), [1, 2, "x"])) == [{"a": 1}, {"a": 2}, {"a": "x"}]
+
+
+def test_wrap_in_dict_with_default_value():
+    result = list(map(T.wrap("a", 999) >> T["b"].sub_by(900), [1, 2]))
+    assert result == [{"a": 1, "b": 99}, {"a": 2, "b": 99}]

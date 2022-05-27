@@ -1,3 +1,4 @@
+from collections import defaultdict
 from typing import Any, Callable
 
 from shorthand.transformation.transformation import Transformation
@@ -86,8 +87,10 @@ class TransformationBuilder:
                 return e
         return self._build(_f)
 
-    def wrap(self, key: Any) -> Transformation:
-        return self._build(lambda x: {key: x})
+    def wrap(self, key: Any, default: Any = _EMPTY) -> Transformation:
+        if default is _EMPTY:
+            return self._build(lambda x: {key: x})
+        return self._build(lambda x: defaultdict(lambda: default, [(key, x)]))
 
     def __getitem__(self, key: Any) -> 'TransformationBuilder':
         return TransformationBuilder(key)
