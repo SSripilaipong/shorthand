@@ -3,7 +3,7 @@ from setuptools import setup
 
 
 NAME = 'shorthand'
-VERSION = '0.0.0'
+VERSION = '0.0.2'
 URL = 'https://github.com/SSripilaipong/shorthand'
 LICENSE = 'MIT'
 AUTHOR = 'SSripilaipong'
@@ -24,3 +24,4 @@ setup(
     classifiers=[],
     include_package_data=True,
 )
+
